@@ -1,15 +1,15 @@
-const express  = require("express")
-  , session  = require("express-session")
-  , passport = require("passport")
-  , Strategy = require("./lib").Strategy
-  , app      = express();
+const express = require("express"),
+    session = require("express-session"),
+    passport = require("passport"),
+    Strategy = require("./lib").Strategy,
+    app = express();
 
-passport.serializeUser(function(user, done) {
-  done(null, user);
+passport.serializeUser((user, done) => {
+    done(null, user);
 });
 
-passport.deserializeUser(function(obj, done) {
-  done(null, obj);
+passport.deserializeUser((obj, done) => {
+    done(null, obj);
 });
 
 const scopes = ["identify"];
@@ -21,8 +21,8 @@ passport.use(new Strategy({
     callbackURL: "http://localhost:5000/callback",
     scope: scopes,
     prompt: prompt
-}, function(accessToken, refreshToken, profile, done) {
-    process.nextTick(function() {
+    }, (accessToken, refreshToken, profile, done) => {
+    process.nextTick(() => {
         return done(null, profile);
     });
 }));
@@ -36,29 +36,35 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get("/login", passport.authenticate("discord", { scope: scopes, prompt: prompt }), function(req, res) {});
+app.get("/login", passport.authenticate("discord", {
+    scope: scopes,
+    prompt: prompt
+}), (req, res) => {});
 
 app.get("/callback",
-    passport.authenticate("discord", { failureRedirect: "/" }), function(req, res) { res.redirect("/info") } // auth success
+    passport.authenticate("discord", {
+        failureRedirect: "/"
+    }),
+    (req, res) => {
+        res.redirect("/info")
+    } // auth success
 );
 
-app.get("/logout", function(req, res) {
+app.get("/logout", (req, res) => {
     req.logout();
     res.redirect("/");
 });
 
-app.get("/info", ensureAuthenticated, function(req, res) {
-    //console.log(req.user)
+const ensureAuthenticated = (req, res, next) => {
+    if (req.isAuthenticated()) return next();
+    res.send("you\'re not logged in");
+}
+
+app.get("/info", ensureAuthenticated, (req, res) => {
     res.json(req.user);
 });
 
-function ensureAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) return next();
-    res.send("you\"re not logged in");
-}
-
-
-app.listen(5000, function (err) {
+app.listen(5000, err => {
     if (err) return console.log(err)
     console.log("Listening at http://localhost:5000/")
 })
