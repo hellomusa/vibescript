@@ -1,31 +1,26 @@
-const express = require("express"),
-    session = require("express-session"),
-    passport = require("passport"),
-    Strategy = require("./lib").Strategy,
-    app = express();
+const express = require("express")
+const session = require("express-session")
+const passport = require("passport")
+const mongoose = require("mongoose")
 
-passport.serializeUser((user, done) => {
-    done(null, user);
-});
+const app = express();
 
-passport.deserializeUser((obj, done) => {
-    done(null, obj);
-});
+// Passport Config
+require('./config/passport')(passport);
 
-const scopes = ["identify"];
-const prompt = "consent"
+// DB Config
+const db = require('./config/keys').mongoURI;
 
-passport.use(new Strategy({
-    clientID: "805188698253688843",
-    clientSecret: "wc0S7ecUZLwxhebzU-EfqGqExwwrUGaI",
-    callbackURL: "http://localhost:5000/callback",
-    scope: scopes,
-    prompt: prompt
-    }, (accessToken, refreshToken, profile, done) => {
-    process.nextTick(() => {
-        return done(null, profile);
-    });
-}));
+// Connect to MongoDB
+mongoose.connect(
+    db,
+    { useNewUrlParser: true ,useUnifiedTopology: true}
+  )
+  .then(() => console.log('MongoDB Connected'))
+  .catch(err => console.log(err));
+
+// Express body parser
+app.use(express.urlencoded({ extended: true }));
 
 app.use(session({
     secret: "keyboard cat",
@@ -36,33 +31,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get("/login", passport.authenticate("discord", {
-    scope: scopes,
-    prompt: prompt
-}), (req, res) => {});
-
-app.get("/callback",
-    passport.authenticate("discord", {
-        failureRedirect: "/"
-    }),
-    (req, res) => {
-        res.redirect("/info")
-    } // auth success
-);
-
-app.get("/logout", (req, res) => {
-    req.logout();
-    res.redirect("/");
-});
-
-const ensureAuthenticated = (req, res, next) => {
-    if (req.isAuthenticated()) return next();
-    res.send("you\'re not logged in");
-}
-
-app.get("/info", ensureAuthenticated, (req, res) => {
-    res.json(req.user);
-});
+// Routes
+app.use('/api', require('./routes/api.js'));
 
 app.listen(5000, err => {
     if (err) return console.log(err)
