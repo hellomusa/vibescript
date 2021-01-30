@@ -4,7 +4,12 @@
   "description": "An application that allows programmers to collaborate and vibe",
   "main": "index.js",
   "scripts": {
-    "client-install": "cd client && npm install"
+    "install-client": "cd client && npm install",
+    "install-server": "cd server && npm install",
+    "start-client": "cd client && npm run start",
+    "start-server": "cd server && npm run start",
+    "start": "npm start-client && npm start-server"
+
   },
   "repository": {
     "type": "git",
