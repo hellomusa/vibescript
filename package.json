@@ -9,7 +9,7 @@
     "start-client": "cd client && npm run start",
     "start-server": "cd server && npm run start",
     "install": "npm run install-client && npm run install-server",
-    "start": "npm start-client && npm start-server"
+    "start": "npm run start-client && npm run start-server"
 
   },
   "repository": {
