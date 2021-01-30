@@ -1,37 +1,30 @@
-import React from 'react';
-import ReactTypeformEmbed from './ReactTypeformEmbed';
+import React, { useEffect } from 'react';
+import * as typeformEmbed from '@typeform/embed';
 
-class Form extends React.Component {
-  constructor(props) {
-    super(props);
-    this.openForm = this.openForm.bind(this);
-  }
+const Form = () => {
 
-  openForm() {
-    this.typeformEmbed.typeform.open();
-  }
-
-  render() {
-    return (
-      <div className="Form">
-        <ReactTypeformEmbed
-          popup
-          autoOpen={false}
-          url="https://demo.typeform.com/to/njdbt5"
-          hideHeaders
-          hideFooter
-          buttonText="Go!"
-          style={{ top: 100 }}
-          ref={tf => {
-            this.typeformEmbed = tf;
-          }}
-        />
-        <button className="btn" onClick={this.openForm} style={{ cursor: 'pointer' }}>
-          Click to open the popup!
-        </button>
-      </div>
-    );
-  }
+  useEffect(() => {
+    const popup1 = typeformEmbed.makePopup(
+      'https://lxp8ldrqhk5.typeform.com/to/GMdc1yP5',
+      {
+        mode: 'popup',
+        autoClose: 3000,
+        hideHeaders: true,
+        hideFooters: true,
+        onSubmit: function() {
+          console.log('success');
+        }
+      }
+    )
+    document.getElementById('bt-popup').addEventListener('click', function() {
+      popup1.open();
+    });
+  });
+  return (
+    <div>
+      <button id="bt-popup" class="my-button">Popup</button>
+    </div>
+  );
 }
 
 export default Form;
