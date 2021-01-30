@@ -12,7 +12,7 @@ const Form = () => {
         hideHeaders: true,
         hideFooters: true,
         onSubmit: function() {
-          console.log('success');
+          console.log('typeform success');
         }
       }
     )
@@ -20,6 +20,7 @@ const Form = () => {
       popup1.open();
     });
   });
+  
   return (
     <div>
       <button id="bt-popup" class="my-button">Popup</button>
