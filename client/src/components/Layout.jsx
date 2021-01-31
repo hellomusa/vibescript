@@ -1,9 +1,16 @@
+import { useState, useEffect } from "react";
 import "./Layout.css";
 import Form from "./Form";
 import MyFooter from "./MyFooter";
 import TextLoop from "react-text-loop";
 
 const Layout = () => {
+  const [isLoggedIn, setLoggedIn] = useState(false);
+
+  const handleClick = () => {
+    setLoggedIn(true);
+  }
+
   return (
     <div>
       <header id="home" className="App-header">
@@ -34,14 +41,24 @@ const Layout = () => {
 
               <br />
               <br />
-              <div class="blue-btn">
-                <a class="first-link" href="api/login">
-                  Get Started
-                </a>
-                <a href="api/login">
-                  Login With Discord
-                </a>
+              {!isLoggedIn && 
+                <div class="blue-btn">
+                  <a class="first-link">
+                    Get Started
+                  </a>
+                  <a href="api/login"
+                    target="_blank"
+                    onClick={handleClick}>
+                    Login With Discord
+                  </a>
               </div>
+              }
+              {isLoggedIn &&
+              <>
+                you are logged in #poggers
+              </>
+              }
+              
 
             </div>
           </div>
