@@ -3,33 +3,22 @@ const router = express.Router();
 
 const { ensureAuthenticated } = require('../config/auth');
 const User = require('../models/User');
-const { route } = require('./api');
+const { route } = require('./auth');
 
 router.post("/leave/:id", async(req, res) => {
 
-	let user = await User.find({"discordID" : req.params.id})
-	
-	User.findOneAndUpdate(
-		{'discordID': user.partnerID },
-		{ $set: { 'partnerID': '' } },
+	let user = await User.findOne({
+		discordID : req.params.id
+	})
 
-		err => {
-			if(err){
-				return res.status(422).send(err);
-			}
-		}
-	);
+	let partner = await User.findOne({
+		discordID : user.partnerID
+	})
 
-	User.findByIdAndUpdate(
-		{'discordID': user.discordID},
-		{ $set: { 'partnerID': ''} },
-
-		err => {
-			if(err){
-				return res.status(422).send(err);
-			}
-		}
-	);
+	user.partnerID = "";
+	user.save();
+	partner.partnerID = "";
+	partner.save();
 
 	res.status(201).json({success: true})
 });

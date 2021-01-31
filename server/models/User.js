@@ -7,7 +7,8 @@ const UserSchema = new mongoose.Schema({
 	},
 	discordID: {
 		type: String,
-		required: true
+		required: true,
+		unique: true
 	},
 	partnerID:{
 		type: String,
