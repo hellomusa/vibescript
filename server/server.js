@@ -45,6 +45,7 @@ app.use('/api/bot', require('./routes/bot.js'));
 app.use('/api', require('./routes/auth.js'));
 app.use('/api', require('./routes/icebreaker.js'));
 app.use('/api', require('./routes/form.js'));
+app.use('/api', require('./routes/partner.js'));
 
 app.listen(5000, err => {
     if (err) return console.log(err)
