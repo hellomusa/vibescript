@@ -13,14 +13,23 @@ router.get("/callback",
         failureRedirect: "/"
     }),
     (req, res) => {
-        res.redirect("/api/info");
+		let user = new User(
+			{
+				discordID: req.user.id 
+			}
+		);
+		user.save();
+		res.redirect("/");
+		
     }
 );
 
 router.get("/login", passport.authenticate("discord", {
     scope: scopes,
     prompt: prompt
-}), (req, res) => {});
+}), (req, res) => {
+
+});
 
 router.get("/logout", (req, res) => {
     req.logout();
