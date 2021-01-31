@@ -34,7 +34,7 @@ export default function App() {
             ],
           },
         ]}
-        bottom="Helping programmers vibe. Made with ❤️ by 💎 Hands"
+        bottom="Helping programmers vibe. Made with ❤️ by 💎 Hands."
       />
     </div>
   );
