@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema({
 		default: ""
 	},
 	genres: {
-		type: String,
+		type: [String],
 		default: ""
 	},
 	denylist: {
