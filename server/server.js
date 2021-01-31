@@ -35,6 +35,7 @@ app.use(passport.session());
 
 // Routes
 app.use('/api', require('./routes/auth.js'));
+app.use('/api', require('./routes/icebreaker.js'));
 
 app.listen(5000, err => {
     if (err) return console.log(err)
