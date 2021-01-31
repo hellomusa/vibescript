@@ -2,6 +2,7 @@ const express = require("express")
 const session = require("express-session")
 const passport = require("passport")
 const mongoose = require("mongoose")
+const MongoStore = require('connect-mongo')(session);
 
 const app = express();
 
@@ -25,14 +26,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(session({
     secret: "keyboard cat",
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
-app.use('/api', require('./routes/api.js'));
+app.use('/api', require('./routes/auth.js'));
 
 app.listen(5000, err => {
     if (err) return console.log(err)
