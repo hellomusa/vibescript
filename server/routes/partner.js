@@ -10,18 +10,17 @@ router.get("/partner", ensureAuthenticated, async (req, res) => {
         res.send({201: "you already have a patrner"});
     }
 
-    while (user.partnerID == "") {
-        let partner = await User.findOne({partnerID: ""});
-        if (partner && (partner.discordID != user.discordID)) {
-            user.partnerID = partner.discordID;
-            partner.partnerID = user.discordID;
-            partner.save();
+    let users = await User.find();
+
+    users.forEach(elem => {
+        if ((elem != user) && (elem.partnerID == "")) {
+            user.partnerID = elem.discordID;
+            elem.partnerID = user.discordID;
+            elem.save();
             user.save();
             res.send({200: "success"});
-            return;
-        }
-    }
-    res.send({500: "server error, couldn't find a partner"});
+        };
+    });
 });
 
 module.exports = router;
