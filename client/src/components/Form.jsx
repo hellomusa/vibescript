@@ -4,8 +4,8 @@ import axios from 'axios';
 
 const Form = () => {
 
-  const submitForm = (formID) => {
-    axios.post(`http://localhost:5000/api/form/${formID}`, {
+  const submitForm = (response_id) => {
+    axios.post(`http://localhost:5000/api/form/${response_id}`, {
     })
     .then((res) => {
       console.log(`Succesfully submitted form: ${res}`);
@@ -34,7 +34,10 @@ const Form = () => {
 
     document.getElementById("random").addEventListener("click", function() {
       fetch('http://localhost:5000/api/icebreaker')
-      .then(res => console.log(res))
+      .then(res => res.json())
+      .then(resJson => {
+        console.log(resJson);
+      })
     });
   });
   

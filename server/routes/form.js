@@ -4,17 +4,23 @@ const User = require('../models/User');
 const fetch = require("node-fetch");
 
 router.post("/form/:id", async (req, res) => {
-    const formID = req.params.id
-    const responseID = req.body.responseID
+    // unique form submission ID
+    const responseID = req.params.id
+    console.log(responseID);
+
     let user = await User.findOne({discordID: req.user.id});
-    user.formID = formID;
-    const token = "DVGXbpjTfJbe34rXfhn3EnkRrJYRvLPV9fyTpS2n1NL5";
+    user.responseID = responseID;
     user.save();
-    fetch(`https://api.typeform.com/forms/${formID}/responses`, {
-    method: 'POST',
+
+    const token = "DVGXbpjTfJbe34rXfhn3EnkRrJYRvLPV9fyTpS2n1NL5";
+    fetch('https://api.typeform.com/forms/GMdc1yP5/responses?' + new URLSearchParams({
+      included_response_ids: responseID,
+    }), {
+    method: 'GET',
     headers: {
       'authorization': `bearer ${token}`
-    }}).then(res => console.log(res));
+    }}).then(res => res.json())
+    .then(resJson => console.log(resJson));
     res.send(200);
 });
 
