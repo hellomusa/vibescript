@@ -11,8 +11,9 @@ const Form = () => {
         autoClose: 3000,
         hideHeaders: true,
         hideFooters: true,
-        onSubmit: function() {
-          console.log("typeform success");
+        transferrableUrlParameters: [123],
+        onSubmit: function(event) {
+          console.log(event.response_id);
         }
       }
     )
