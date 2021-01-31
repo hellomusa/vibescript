@@ -16,6 +16,7 @@ const Layout = () => {
               <h2>
                 <TextLoop
                   interval={1400}
+                  fade={false}
                   springConfig={{ stiffness: 180, damping: 8}}
                 >
                   <span class="verb">Code</span>
@@ -31,7 +32,7 @@ const Layout = () => {
                 <a class="first-link" href="">
                   Get Started
                 </a>
-                <a href="/login">
+                <a href="#">
                   Login With Discord
                 </a>
               </div>
