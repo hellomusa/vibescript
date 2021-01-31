@@ -1,16 +1,16 @@
 # VibeScript
 
-## What is VibeScript?
-Introducing <VibeScript/>, your pair program 'n' vibe matchmaker.  Vibescript is a single-page, easy to use web application that will automatically match you with other coders who are also desperately searching for human company in these isolating times. 
+## What is <VibeScript/>?
+Introducing VibeScript, your pair program 'n' vibe matchmaker.  Vibescript is a single-page, easy to use web application that will automatically match you with other coders who are also desperately searching for human company in these isolating times. 
 
 ## Inspiration
-As programmers, we know how challenging it can be to work on your task when you're road-blocked. Sometimes we need someone else to bounce ideas off of, discuss strategies and workflow logic, or just someone else to vibe with while you both work. It's not always easy to find someone to pair program with, especially during COVID when we are stuck at home. We know everyone has gone through this situation before, whether they are experienced coders or someone who is just starting to pick up some programming skills. No matter your experience or skill level, we've come up with a solution.
+As programmers, we know how challenging it can be to work on your task when you're road-blocked. Sometimes we need someone else to bounce ideas off of, discuss strategies and workflow logic, or just someone to vibe with while you both work. It's not always easy to find someone to pair program with, especially during COVID when we are stuck at home. We know everyone has gone through this situation before, whether they are experienced coders or someone who is just starting to pick up some programming skills. No matter your experience or skill level, we've come up with a solution.
 
 ## How does it work?
-Users are prompted to create an account using discord, and fill out a form to be used by a match making to pair the user with another programmer! Upon being paired, both users will be prompted to join a discord server, and will be sent to a text/voice channel in the discord server for each other to "vibe out" with.
+Users are prompted to login using discord and fill out a form to be used by a match making to pair the user with another programmer! Upon being paired, you will both be added to our Vibescript server and get your own voice and text channel where you can vibe out! 
 
-## How we built it?
-VibeScript was built on a MERN Stack, also known as a MongoDB, ExpressJS, ReactJS, NodeJS stack, alongside the Discord API and a Python based Discord bot. MongoDB would be the database used to store user information, such as login, form data, etc, and would be used by the rest of the application in order to efficiently process users engaging with the application. The REST API backend would be deployed using Mongoose/ExpressJS/NodeJS, and would be used to serve and modify the database. The discord API and a Python based Discord bot we designed is used to ensure that users are assigned to proper roles and sent to the correct channel in order to VIBE with their match!
+## How we built it
+VibeScript was built on a MERN Stack, also known as a MongoDB, ExpressJS, ReactJS, NodeJS stack, alongside the Discord API and a Python based Discord bot. MongoDB is the database used to store user information, such as login, form data, etc, and would be used by the rest of the application in order to efficiently process users engaging with the application. The REST API backend would be deployed using Mongoose/ExpressJS/NodeJS, and would be used to serve and modify the database. The discord API and a Python based Discord bot we designed is used to ensure that users are assigned to proper roles and sent to the correct channel in order to VIBE with their match!
 
 ## Launch the application locally
 In order to launch the application locally, in the main directory, `npm install`, and then `npm start`. Navigate to `localhost:5000` in your browser in order to use the application.
