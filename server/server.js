@@ -3,6 +3,7 @@ const session = require("express-session")
 const passport = require("passport")
 const mongoose = require("mongoose")
 const MongoStore = require('connect-mongo')(session);
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -23,6 +24,8 @@ mongoose.connect(
 // Express body parser
 app.use(express.urlencoded({ extended: true }));
 
+app.use(bodyParser.json());
+
 app.use(session({
     secret: "keyboard cat",
     resave: false,
@@ -37,6 +40,7 @@ app.use(passport.session());
 app.use('/api/bot', require('./routes/bot.js'));
 app.use('/api', require('./routes/auth.js'));
 app.use('/api', require('./routes/icebreaker.js'));
+app.use('/api', require('./routes/form.js'));
 
 app.listen(5000, err => {
     if (err) return console.log(err)
