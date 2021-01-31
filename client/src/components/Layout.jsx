@@ -19,6 +19,7 @@ const Layout = () => {
                   fade={false}
                   mask={true}
                  > 
+                  <span class="verb">Vibe</span>
                   <span class="verb">Figure out how to center a {"<"}div{">"}</span>
                   <span class="verb">Collaborate</span>
                   <span class="verb">Make virtual coffee</span>
@@ -27,7 +28,6 @@ const Layout = () => {
                   <span class="verb">Listen to music</span>
                   <span class="verb">Discuss the stock market</span>
                   <span class="verb">Become friends</span>
-                  <span class="verb">Vibe</span>
                   </TextLoop>{" "}
                 with other programmers.
               </h2>
@@ -35,10 +35,10 @@ const Layout = () => {
               <br />
               <br />
               <div class="blue-btn">
-                <a class="first-link" href="">
+                <a class="first-link" href="api/login">
                   Get Started
                 </a>
-                <a href="#">
+                <a href="api/login">
                   Login With Discord
                 </a>
               </div>
