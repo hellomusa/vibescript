@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/User');
 
 router.post("/form/:id", async (req, res) => {
+    console.log(req);
     let user = await User.findOne({discordID: req.user.id});
     user.formID = req.params.id;
     user.save();

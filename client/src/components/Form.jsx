@@ -5,7 +5,7 @@ import axios from 'axios';
 const Form = () => {
 
   const submitForm = (formID) => {
-    axios.post('https://localhost:5000/api/form', {
+    axios.post('http://localhost:5000/api/form', {
       id: formID
     })
     .then((res) => {
@@ -33,11 +33,17 @@ const Form = () => {
     document.getElementById("bt-popup").addEventListener("click", function() {
       popup1.open();
     });
+
+    document.getElementById("random").addEventListener("click", function() {
+      fetch('http://localhost:5000/api/icebreaker')
+      .then(res => console.log(res))
+    });
   });
   
   return (
     <div>
       <button id="bt-popup" class="my-button">Popup</button>
+      <button id="random">Click me</button>
     </div>
   );
 }

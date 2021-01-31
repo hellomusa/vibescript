@@ -8,7 +8,7 @@ router.get("/icebreaker", ensureAuthenticated, (req, res) => {
     IceBreaker.countDocuments((err, count) => {
         let random = Math.floor(Math.random() * count)
         IceBreaker.findOne().skip(random).exec((err, result) => {
-            res.json(result);
+            res.json(result.text);
           });
       });
 });
