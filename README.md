@@ -1,6 +1,6 @@
 # VibeScript
 
-## What is <VibeScript/>?
+## What is < VibeScript />?
 Introducing VibeScript, your pair program 'n' vibe matchmaker.  Vibescript is a single-page, easy to use web application that will automatically match you with other coders who are also desperately searching for human company in these isolating times. 
 
 ## Inspiration
