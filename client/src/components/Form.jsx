@@ -5,8 +5,7 @@ import axios from 'axios';
 const Form = () => {
 
   const submitForm = (formID) => {
-    axios.post('http://localhost:5000/api/form', {
-      id: formID
+    axios.post(`http://localhost:5000/api/form/${formID}`, {
     })
     .then((res) => {
       console.log(`Succesfully submitted form: ${res}`);
@@ -24,7 +23,6 @@ const Form = () => {
         autoClose: 3000,
         hideHeaders: true,
         hideFooters: true,
-        transferrableUrlParameters: [123],
         onSubmit: function(event) {
           submitForm(event.response_id);
         }

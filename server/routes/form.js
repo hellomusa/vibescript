@@ -1,32 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
+const fetch = require("node-fetch");
 
 router.post("/form/:id", async (req, res) => {
-    console.log(req);
+    const formID = req.params.id
+    const responseID = req.body.responseID
     let user = await User.findOne({discordID: req.user.id});
-    user.formID = req.params.id;
+    user.formID = formID;
+    const token = "DVGXbpjTfJbe34rXfhn3EnkRrJYRvLPV9fyTpS2n1NL5";
     user.save();
+    fetch(`https://api.typeform.com/forms/${formID}/responses`, {
+    method: 'POST',
+    headers: {
+      'authorization': `bearer ${token}`
+    }}).then(res => console.log(res));
     res.send(200);
-});
-
-router.post("/form/callback", async (req, res) => {
-  console.log(req.body);
-  let token = req.body.form_response.token;
-  let user = await User.findOne({formID: token});
-  req.body.form_response.answers.forEach((elem) => {
-    if (elem.type == 'text') {
-      user.name = elem.text;
-    }
-    if (elem.type ==  'url') {
-      user.github = elem.url;
-    }
-    if (elem.type == 'choices') {
-      user.genres = elem.choices.labels;
-    }
-    user.save();
-  })
-  res.send(200);
 });
 
 module.exports = router;
