@@ -53,13 +53,7 @@ const Layout = () => {
                   </a>
               </div>
               }
-              {isLoggedIn &&
-              <>
-                you are logged in #poggers
-              </>
-              }
               
-
             </div>
           </div>
           <Form isLoggedIn={isLoggedIn}/>
