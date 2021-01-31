@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.6.2",
     "@typeform/embed": "^0.34.1",
     "prop-types": "^15.7.2",
+    "rc-footer": "^0.6.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.1",

@@ -1,7 +1,9 @@
 import "./Layout.css";
-import Form from './Form';
+import Form from "./Form";
 
-import TextLoop from 'react-text-loop';
+import TextLoop from "react-text-loop";
+import Footer from "rc-footer";
+import MyFooter from "./MyFooter";
 
 const Header = () => {
   return (
@@ -11,7 +13,7 @@ const Header = () => {
           <div className="row justify-content-center">
             <div className="col-md-6">
 
-              <h1 class="name"><i>Vibe</i><span style={{color: '#23272a'}}>Script</span></h1>
+              <h1 class="name"><i>Vibe</i><span style={{color: "#23272a"}}>Script</span></h1>
 
               <h2>
                 <TextLoop
@@ -41,6 +43,7 @@ const Header = () => {
           {/* <Form /> */}
         </div>
       </header>
+      <MyFooter />
     </div>
   )
 }
