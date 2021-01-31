@@ -4,5 +4,5 @@ module.exports = {
             return next();
         }
         res.send('go login first :D');
-    },
+    }
 };

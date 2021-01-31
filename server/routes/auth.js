@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 
-const { ensureAuthenticated } = require('../config/auth');
 const User = require('../models/User');
 
 const scopes = ["identify"];
@@ -34,10 +33,6 @@ router.get("/login", passport.authenticate("discord", {
 router.get("/logout", (req, res) => {
     req.logout();
     res.redirect("/");
-});
-
-router.get("/info", ensureAuthenticated, (req, res) => {
-    res.json(req.user);
 });
 
 module.exports = router;
