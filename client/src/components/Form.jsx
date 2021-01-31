@@ -18,9 +18,9 @@ const Form = ({isLoggedIn}) => {
     })
   };
 
-  const fetchPartner = () => {
+  const fetchPartner = async () => {
     try {
-      const resp = axios.get('http://localhost:5000/api/partner');
+      const resp = await axios.get('http://localhost:5000/api/partner');
       if (resp.status === 200) {
         setIsPartnerLoading(false);
       }
@@ -48,15 +48,6 @@ const Form = ({isLoggedIn}) => {
         popup1.open();
       });
     }
-
-    // document.getElementById("random").addEventListener("click", function() {
-    //   fetch('http://localhost:5000/api/icebreaker')
-    //   .then(res => res.json())
-    //   .then(resJson => {
-    //     console.log(resJson);
-    //   })
-    // });
-
   });
   
   return (
