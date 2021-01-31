@@ -8,7 +8,7 @@ const Form = ({isLoggedIn}) => {
   const [icebreaker, setIcebreaker] = useState("");
 
   const submitForm = (response_id) => {
-    axios.post(`http://localhost:5000/api/form/${response_id}`, {
+    axios.post(`https://vibescript.com/api/form/${response_id}`, {
     })
     .then((res) => {
       console.log(`Succesfully submitted form: ${res}`);
@@ -21,7 +21,7 @@ const Form = ({isLoggedIn}) => {
 
   const fetchPartner = async () => {
     try {
-      const resp = await axios.get('http://localhost:5000/api/partner');
+      const resp = await axios.get('https://vibescript.com/api/partner');
       if (resp.status === 200) {
         setIsPartnerLoading(false);
         fetchIcebreaker();
@@ -32,7 +32,7 @@ const Form = ({isLoggedIn}) => {
   }
 
   const fetchIcebreaker = () => {
-    axios.get('http://localhost:5000/api/icebreaker')
+    axios.get('https://vibescript.com/api/icebreaker')
     .then((res) => {
       setIcebreaker(res.data);
     })
