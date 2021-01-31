@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { ensureAuthenticated } = require('../config/auth');
 const User = require('../models/User');
-const { route } = require('./auth');
 
 router.post("/leave/:id", async(req, res) => {
 
@@ -24,12 +22,14 @@ router.post("/leave/:id", async(req, res) => {
 });
 
 router.get("/user/:id", async(req, res) => {
-	let user = await User.find({'discordID': req.params.id});
+	let thisuser = await User.find({'discordID': req.params.id});
 
-	if(user == undefined){
-		res.status(404).send("User is not registered");
+	console.log(thisuser);
+
+	if(!thisuser.length){
+		return res.status(404).send("User is not registered");
 	}
-	res.status(200).json(user);
+	return res.status(200).send(thisuser);
 });
 
 module.exports = router;
