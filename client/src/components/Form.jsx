@@ -5,6 +5,7 @@ import axios from 'axios';
 const Form = ({isLoggedIn}) => {
 
   const [isPartnerLoading, setIsPartnerLoading] = useState(null);
+  const [icebreaker, setIcebreaker] = useState("");
 
   const submitForm = (response_id) => {
     axios.post(`http://localhost:5000/api/form/${response_id}`, {
@@ -18,15 +19,23 @@ const Form = ({isLoggedIn}) => {
     })
   };
 
-  const fetchPartner = () => {
+  const fetchPartner = async () => {
     try {
-      const resp = axios.get('http://localhost:5000/api/partner');
+      const resp = await axios.get('http://localhost:5000/api/partner');
       if (resp.status === 200) {
         setIsPartnerLoading(false);
+        fetchIcebreaker();
       }
     } catch (err) {
       console.log('err');
     }
+  }
+
+  const fetchIcebreaker = () => {
+    axios.get('http://localhost:5000/api/icebreaker')
+    .then((res) => {
+      setIcebreaker(res.data);
+    })
   }
 
   useEffect(() => {
@@ -68,7 +77,11 @@ const Form = ({isLoggedIn}) => {
         <>Loading...</>
       }
       {isPartnerLoading === false &&
+        <>
         <a href="https://discord.gg/bpNJY4Pj">Go meet your partner!</a>
+        <br/>
+        Try asking them: "{icebreaker}"
+        </>
       }
       {/* <button id="random">Click me (temporary)</button> */}
     </div>
