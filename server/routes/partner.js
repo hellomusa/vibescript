@@ -13,7 +13,7 @@ router.get("/partner", ensureAuthenticated, async (req, res) => {
     let users = await User.find();
 
     users.forEach(elem => {
-        if ((elem != user) && (elem.partnerID == "")) {
+        if ((elem != user) && (elem.partnerID == "") && (elem.partnerID != user.partnerID)){
             user.partnerID = elem.discordID;
             elem.partnerID = user.discordID;
             elem.save();
