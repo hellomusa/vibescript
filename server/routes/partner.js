@@ -9,10 +9,10 @@ router.get("/partner", ensureAuthenticated, async (req, res) => {
     if (user.partnerID != ""){
         res.send({201: "you already have a patrner"});
     }
-    
+
     while (user.partnerID == "") {
         let partner = await User.findOne({partnerID: ""});
-        if (partner && (partner != user)) {
+        if (partner.discordID && (partner.discordID != user.discordID)) {
 			console.log(partner);
 			console.log(user);
             user.partnerID = partner.discordID;
