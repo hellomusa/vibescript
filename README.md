@@ -38,3 +38,9 @@ Once the application has started, start the discord, in the terminal in the main
 ├── requirements.txt - Contains all python libraries to be pip installed for the Discord bot to run
 └── README.md
 ```
+
+## Team Members
+* [Musa Ali](https://github.com/hellomusa)
+* [Hamza Sohail](https://github.com/h4sohail)
+* [Jo Sundaram](https://github.com/Jo-Sundaram)
+* [Samee Shahood](https://github.com/samee-shahood)
