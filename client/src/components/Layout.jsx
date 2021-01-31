@@ -38,7 +38,7 @@ const Layout = () => {
 
             </div>
           </div>
-          {/* <Form /> */}
+          <Form />
         </div>
       </header>
       <MyFooter />

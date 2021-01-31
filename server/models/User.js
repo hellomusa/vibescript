@@ -7,8 +7,7 @@ const UserSchema = new mongoose.Schema({
 	},
 	discordID: {
 		type: String,
-		required: true,
-		unique: true
+		required: true
 	},
 	partnerID:{
 		type: String,
@@ -18,13 +17,17 @@ const UserSchema = new mongoose.Schema({
 		type:String,
 		default: ""
 	},
-	spotify: {
+	genres: {
 		type: String,
 		default: ""
 	},
 	denylist: {
 		type: [String],
 		default: []
+	},
+	formID: {
+		type: String,
+		default: ""
 	},
 	date: {
 		type: Date,

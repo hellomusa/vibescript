@@ -3,8 +3,11 @@ const session = require("express-session")
 const passport = require("passport")
 const mongoose = require("mongoose")
 const MongoStore = require('connect-mongo')(session);
+const bodyParser = require('body-parser');
 
 const app = express();
+
+const path = require("path");
 
 // Passport Config
 require('./config/passport')(passport);
@@ -23,6 +26,8 @@ mongoose.connect(
 // Express body parser
 app.use(express.urlencoded({ extended: true }));
 
+app.use(bodyParser.json());
+
 app.use(session({
     secret: "keyboard cat",
     resave: false,
@@ -33,10 +38,13 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(express.static(path.join(__dirname, "../client", "build")));
+
 // Routes
 app.use('/api/bot', require('./routes/bot.js'));
 app.use('/api', require('./routes/auth.js'));
 app.use('/api', require('./routes/icebreaker.js'));
+app.use('/api', require('./routes/form.js'));
 
 app.listen(5000, err => {
     if (err) return console.log(err)
