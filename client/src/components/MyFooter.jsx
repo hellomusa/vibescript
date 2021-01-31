@@ -1,8 +1,8 @@
-import 'rc-footer/assets/index.css';
 import React, { useState } from 'react';
 import Footer from 'rc-footer';
+import 'rc-footer/assets/index.css';
 
-export default function App() {
+const MyFooter = () => {
   return (
     <div>
       <Footer
@@ -39,3 +39,5 @@ export default function App() {
     </div>
   );
 }
+
+export default MyFooter;
