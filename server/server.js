@@ -34,7 +34,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
-app.use('/api', require('./routes/api.js'));
+app.use('/api', require('./routes/auth.js'));
 
 app.listen(5000, err => {
     if (err) return console.log(err)
