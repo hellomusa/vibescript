@@ -1,4 +1,4 @@
-# [VibeScript](http://vibescript.com/) (demo may not work as expected)
+# [VibeScript](https://vibescript.com/) (demo may not work as expected, reached TypeForm response limit lol)
 
 ## What is < VibeScript />?
 Introducing VibeScript, your pair program 'n' vibe matchmaker.  Vibescript is a single-page, easy to use web application that will automatically match you with other coders who are also desperately searching for human company in these isolating times. 
