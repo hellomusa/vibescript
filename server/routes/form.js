@@ -11,10 +11,21 @@ router.get("/form/:id", async (req, res) => {
 
 router.post("/form/callback", (req, res) => {
   console.log(req.body);
+  let token = req.body.form_response.token;
+  let user = await User.findOne({formID: token});
   req.body.form_response.answers.forEach((elem) => {
-    console.log(elem);
+    if (elem.type == 'text') {
+      user.name = elem.text;
+    }
+    if (elem.type ==  'url') {
+      user.github = elem.url;
+    }
+    if (elem.type == 'choices') {
+      user.genres = elem.choices.labels;
+    }
+    user.save();
   })
-  res.end();
+  res.send(200);
 });
 
 module.exports = router;
