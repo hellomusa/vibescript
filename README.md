@@ -17,7 +17,8 @@ In order to launch the application locally, in the main directory, `npm install`
 
 Once the application has started, start the discord, in the terminal in the main directory, `pip install -r`, then `python bot.py`.
 
-## Project structure```
+## Project structure
+```
 .
 ├── .vscode/ - Visual Studio Code configuration files
 ├── backend/ - Backend App
