@@ -7,6 +7,8 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+const path = require("path");
+
 // Passport Config
 require('./config/passport')(passport);
 
@@ -35,6 +37,8 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(express.static(path.join(__dirname, "../client", "build")));
 
 // Routes
 app.use('/api/bot', require('./routes/bot.js'));

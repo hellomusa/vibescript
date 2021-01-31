@@ -1,7 +1,20 @@
 import React, { useEffect } from "react";
 import * as typeformEmbed from "@typeform/embed";
+import axios from 'axios';
 
 const Form = () => {
+
+  const submitForm = (formID) => {
+    axios.post('https://localhost:5000/api/form', {
+      id: formID
+    })
+    .then((res) => {
+      console.log(`Succesfully submitted form: ${res}`);
+    })
+    .catch((err) => {
+      console.log(`Error on form submit: ${err}`);
+    })
+  };
 
   useEffect(() => {
     const popup1 = typeformEmbed.makePopup(
@@ -13,7 +26,7 @@ const Form = () => {
         hideFooters: true,
         transferrableUrlParameters: [123],
         onSubmit: function(event) {
-          console.log(event.response_id);
+          submitForm(event.response_id);
         }
       }
     )
