@@ -18,7 +18,7 @@ router.get("/callback",
 			}
 		);
 		user.save();
-		res.redirect({200: "you can close this tab now :)"});
+		res.send({200: "you can close this tab now :)"});
 		
     }
 );

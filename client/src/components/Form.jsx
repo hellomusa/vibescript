@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import * as typeformEmbed from "@typeform/embed";
 import axios from 'axios';
 
-const Form = () => {
+const Form = ({isLoggedIn}) => {
 
   const submitForm = (response_id) => {
     axios.post(`http://localhost:5000/api/form/${response_id}`, {
@@ -28,23 +28,28 @@ const Form = () => {
         }
       }
     )
-    document.getElementById("bt-popup").addEventListener("click", function() {
-      popup1.open();
-    });
+    if (isLoggedIn) {
+      document.getElementById("bt-popup").addEventListener("click", function() {
+        popup1.open();
+      });
+    }
 
-    document.getElementById("random").addEventListener("click", function() {
-      fetch('http://localhost:5000/api/icebreaker')
-      .then(res => res.json())
-      .then(resJson => {
-        console.log(resJson);
-      })
-    });
+    // document.getElementById("random").addEventListener("click", function() {
+    //   fetch('http://localhost:5000/api/icebreaker')
+    //   .then(res => res.json())
+    //   .then(resJson => {
+    //     console.log(resJson);
+    //   })
+    // });
+    
   });
   
   return (
     <div>
-      <button id="bt-popup" class="my-button">Popup</button>
-      <button id="random">Click me</button>
+      {isLoggedIn &&
+          <button id="bt-popup" class="my-button">Popup</button>
+      }
+      {/* <button id="random">Click me (temporary)</button> */}
     </div>
   );
 }

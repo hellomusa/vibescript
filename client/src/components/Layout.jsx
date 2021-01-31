@@ -62,7 +62,7 @@ const Layout = () => {
 
             </div>
           </div>
-          <Form />
+          <Form isLoggedIn={isLoggedIn}/>
         </div>
       </header>
       <MyFooter />
