@@ -1,40 +1,35 @@
-const Discord = require('discord.js');
-const client = new Discord.Client();
-const channelID = '805189024200785964';
+const express = require('express');
+const router = express.Router();
 
+const { ensureAuthenticated } = require('../config/auth');
+const User = require('../models/User');
+const { route } = require('./auth');
 
+router.post("/leave/:id", async(req, res) => {
 
+	let user = await User.findOne({
+		discordID : req.params.id
+	})
 
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
+	let partner = await User.findOne({
+		discordID : user.partnerID
+	})
+
+	user.partnerID = "";
+	user.save();
+	partner.partnerID = "";
+	partner.save();
+
+	res.status(201).json({success: true})
 });
 
-client.on('message', msg => {
-    if (msg.content === 'ping') {
-        guild = msg.guild;
+router.get("/user/:id", async(req, res) => {
+	let user = await User.find({'discordID': req.params.id});
 
-        guild.channels.create('new-general', { reason: 'Needed a cool new channel' })
-        .then()
-        .catch(console.error);
-
-        // Create a new channel with permission overwrites
-        guild.channels.create('new-voice', {
-        type: 'voice',
-        permissionOverwrites: [
-            {
-            id: msg.author.id,
-            deny: ['VIEW_CHANNEL'],
-            },
-        ],
-        })
-
-        msg.reply('Pong!');
-    }
+	if(user == undefined){
+		res.status(404).send("User is not registered");
+	}
+	res.status(200).json(user);
 });
 
-
-client.on('guildMemberAdd', member => {
-    member.guild.channels.get(channelID).send("Welcome"); 
-});
-
-client.login('ODA1MTg4Njk4MjUzNjg4ODQz.YBXQaQ.vSqL3djzDqWVTDyDnzeNPUeyOs4');
+module.exports = router;

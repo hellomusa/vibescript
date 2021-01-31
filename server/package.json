@@ -10,16 +10,11 @@
   "author": "",
   "license": "",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "connect-flash": "^0.1.1",
-    "discord.js": "^12.5.1",
-    "ejs": "^2.6.1",
-    "express": "^4.16.4",
-    "express-ejs-layouts": "^2.5.0",
-    "express-session": "^1.15.6",
-    "mongoose": "^5.7.5",
-    "passport": "^0.4.0",
-    "passport-local": "^1.0.0",
+    "connect-mongo": "^3.2.0",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "mongoose": "^5.11.14",
+    "passport": "^0.3.2",
     "passport-oauth2": "^1.5.0"
   }
 }

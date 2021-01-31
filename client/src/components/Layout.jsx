@@ -1,9 +1,9 @@
 import "./Layout.css";
-import Form from './Form';
+import Form from "./Form";
+import MyFooter from "./MyFooter";
+import TextLoop from "react-text-loop";
 
-import TextLoop from 'react-text-loop';
-
-const Header = () => {
+const Layout = () => {
   return (
     <div>
       <header id="home" className="App-header">
@@ -11,7 +11,7 @@ const Header = () => {
           <div className="row justify-content-center">
             <div className="col-md-6">
 
-              <h1 class="name"><i>Vibe</i><span style={{color: '#23272a'}}>Script</span></h1>
+              <h1 class="name">{"<"}<i style={{color: "#009ACD"}}>Vibe</i>Script{" />"}</h1>
 
               <h2>
                 <TextLoop
@@ -32,7 +32,7 @@ const Header = () => {
                   Get Started
                 </a>
                 <a href="/login">
-                  Sign In With Discord
+                  Login With Discord
                 </a>
               </div>
 
@@ -41,8 +41,9 @@ const Header = () => {
           {/* <Form /> */}
         </div>
       </header>
+      <MyFooter />
     </div>
   )
 }
 
-export default Header;
+export default Layout;
