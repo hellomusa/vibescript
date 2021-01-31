@@ -6,6 +6,10 @@ const User = require('../models/User');
 
 router.get("/partner", ensureAuthenticated, async (req, res) => {
     let user = await User.findOne({discordID: req.user.id});
+    if (user.partnerID != ""){
+        res.send({201: "you already have a patrner"});
+    }
+    
     while (user.partnerID == "") {
         let partner = await User.findOne({partnerID: ""});
         if (partner && (partner != user)) {
@@ -19,7 +23,7 @@ router.get("/partner", ensureAuthenticated, async (req, res) => {
             return;
         }
     }
-    res.send({500: "server error, couldn't find a partner"})
+    res.send({500: "server error, couldn't find a partner"});
 });
 
 module.exports = router;

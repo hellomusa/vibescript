@@ -11,15 +11,20 @@ router.get("/callback",
     passport.authenticate("discord", {
         failureRedirect: "/"
     }),
-    (req, res) => {
-		let user = new User(
-			{
-				discordID: req.user.id 
-			}
-		);
-		user.save();
+    async (req, res) => {
+        let user = await User.findOne({
+            discordID: req.user.id
+        });
+
+        if (!user) {
+            user = new User(
+                {
+                    discordID: req.user.id 
+                }
+            );
+            user.save();
+        }
 		res.send({200: "you can close this tab now :)"});
-		
     }
 );
 
