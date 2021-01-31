@@ -26,9 +26,7 @@ router.get("/callback",
 router.get("/login", passport.authenticate("discord", {
     scope: scopes,
     prompt: prompt
-}), (req, res) => {
-
-});
+}), (req, res) => {});
 
 router.get("/logout", (req, res) => {
     req.logout();
