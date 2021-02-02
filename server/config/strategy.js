@@ -1,6 +1,6 @@
-var OAuth2Strategy      = require('passport-oauth2')
-  , InternalOAuthError  = require('passport-oauth2').InternalOAuthError
-  , util                = require('util');
+const OAuth2Strategy = require('passport-oauth2');
+const InternalOAuthError = require('passport-oauth2').InternalOAuthError;
+const util = require('util');
 
 function Strategy(options, verify) {
     options = options || {};
@@ -16,20 +16,21 @@ function Strategy(options, verify) {
 util.inherits(Strategy, OAuth2Strategy);
 
 Strategy.prototype.userProfile = function(accessToken, done) {
-    var self = this;
+    let self = this;
     this._oauth2.get('https://discord.com/api/users/@me', accessToken, function(err, body, res) {
+        let parsedData;
         if (err) {
             return done(new InternalOAuthError('Failed to fetch the user profile.', err))
         }
 
         try {
-            var parsedData = JSON.parse(body);
+            parsedData = JSON.parse(body);
         }
         catch (e) {
             return done(new Error('Failed to parse the user profile.'));
         }
 
-        var profile = parsedData; // has the basic user stuff
+        let profile = parsedData; // has the basic user stuff
         profile.provider = 'discord';
         profile.accessToken = accessToken;
 
@@ -50,9 +51,10 @@ Strategy.prototype.userProfile = function(accessToken, done) {
 Strategy.prototype.checkScope = function(scope, accessToken, cb) {
     if (this._scope && this._scope.indexOf(scope) !== -1) {
         this._oauth2.get('https://discord.com/api/users/@me/' + scope, accessToken, function(err, body, res) {
+            let json;
             if (err) return cb(new InternalOAuthError('Failed to fetch user\'s ' + scope, err));
             try {
-                var json = JSON.parse(body);
+                json = JSON.parse(body);
             }
             catch (e) {
                 return cb(new Error('Failed to parse user\'s ' + scope));
@@ -65,7 +67,7 @@ Strategy.prototype.checkScope = function(scope, accessToken, cb) {
 }
 
 Strategy.prototype.authorizationParams = function(options) {
-    var params = {};
+    let params = {};
     if (typeof options.permissions !== 'undefined') {
         params.permissions = options.permissions;
     }
