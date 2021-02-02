@@ -25,14 +25,12 @@ router.get("/callback",
         });
 
         if (!user) {
-            user = new User(
-                {
-                    discordID: req.user.id 
-                }
-            );
+            user = new User({
+                discordID: req.user.id
+            });
             user.save();
         }
-		res.send({200: "you can close this tab now :)"});
+		res.redirect("/");
     }
 );
 
