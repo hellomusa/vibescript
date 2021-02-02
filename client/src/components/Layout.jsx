@@ -3,13 +3,19 @@ import "./Layout.css";
 import Form from "./Form";
 import MyFooter from "./MyFooter";
 import TextLoop from "react-text-loop";
+import axios from 'axios';
 
 const Layout = () => {
   const [isLoggedIn, setLoggedIn] = useState(false);
-
-  const handleClick = () => {
-    setLoggedIn(true);
-  }
+  useEffect(() => {
+    axios.get('/api/authenticated')
+      .then(res => {
+        setLoggedIn(res.data.authenticated);
+      })
+      .catch((error) => {
+        setLoggedIn(false)
+    });
+  }, []);
 
   return (
     <div>
@@ -48,7 +54,7 @@ const Layout = () => {
                   </a>
                   <a href="api/login"
                     target="_blank"
-                    onClick={handleClick}>
+                    onClick="">
                     Login With Discord
                   </a>
               </div>
