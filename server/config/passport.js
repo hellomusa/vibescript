@@ -1,5 +1,5 @@
   
-const Strategy = require("../lib").Strategy;
+const Strategy = require("./strategy");
 
 // OAuth Config
 const discordClientID = require('./keys').discordClientID;
