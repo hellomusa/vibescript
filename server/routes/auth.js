@@ -7,6 +7,14 @@ const User = require('../models/User');
 const scopes = ["identify"];
 const prompt = "consent";
 
+router.get("/authenticated", (req, res) => {
+    const authenticated = typeof req.user !== 'undefined';
+
+    res.status(200).json({
+        authenticated,
+    });
+});
+
 router.get("/callback",
     passport.authenticate("discord", {
         failureRedirect: "/"
